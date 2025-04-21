@@ -1,0 +1,3 @@
+Key 	Name/Value 	Type 	Description
+1 	gauntletID 	Integer 	the Gauntlet ID, starting at 1
+3 	levels 	String 	List of gauntlet level IDs seperated by ,

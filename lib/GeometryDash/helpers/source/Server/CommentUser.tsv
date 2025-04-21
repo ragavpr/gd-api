@@ -1,0 +1,8 @@
+Key 	Name/Value 	Type 	Description
+1 	userName 	String 	Author's username
+9 	icon 	Integer 	Which icon the player is using, starting with 1 as the first icon
+10 	playerColor 	Integer 	Author's primary player color, presumably ordered cronologically from left to right per update
+11 	playerColor2 	Integer 	Author's secondary player color, presumably ordered cronologically from left to right per update
+14 	iconType 	Integer 	Author's icon type indexing an array of icon, ship, ball, ufo, wave, robot, spider
+15 	glow 	Integer 	0 = no glow, 2 = glow
+16 	accountID 	Integer 	Author's account ID. This is different than the player ID
