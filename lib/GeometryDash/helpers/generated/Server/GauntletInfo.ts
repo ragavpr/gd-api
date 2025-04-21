@@ -1,8 +1,8 @@
 export type GauntletInfo = {
-  gauntletid : number // the Gauntlet ID, starting at 1
+  gauntletId : number // the Gauntlet ID, starting at 1
   levels     : string // List of gauntlet level IDs seperated by ,
 }
 export const GauntletInfo_Map = {
-   1: "gauntletid",
+   1: "gauntletId",
    3: "levels",
 }
