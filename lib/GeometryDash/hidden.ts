@@ -25,7 +25,7 @@ export const key = {
   statSubmissionIntegrity   : '',
 };
 export const salt = {
-  levelUploadSeed     : '',
+  levelHash           : '',
   commentChk          : '',
   socialChk           : '',
   profileUpdateChk    : '',
@@ -35,4 +35,5 @@ export const salt = {
   rewardsHash         : '',
   accountPassword     : '',
   gjp2                : '',
+  cdnTokenUUID        : '',
 };

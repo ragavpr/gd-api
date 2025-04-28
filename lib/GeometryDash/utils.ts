@@ -37,6 +37,10 @@ export function saltedSHA1(str: string, salt: string) {
   return SHA1(str + salt)
 }
 
+export function MD5(str: string) {
+  return CG.MD5(str).toHex()
+}
+
 export function generateRS(n = 10) {
   // const random = Array.from(crypto.randomBytes(n).map(byte => byte % 62)); // prone to modulo bias
   const random = Array.from({ length: n }, () => crypto.randomInt(0, 62));
