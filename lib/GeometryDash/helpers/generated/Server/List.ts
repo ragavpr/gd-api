@@ -1,7 +1,9 @@
+import * as TR from "../../Serializers"
+
 export type List = {
-  listId                : number   // The id of the list
+  listID                : number   // The id of the list
   listName              : string   // The name of the list
-  accountId             : number   // The account ID of the list author
+  accountID             : number   // The account ID of the list author
   username              : string   // The username of the list author
   
   description           : string   // The list description, encoded in base64
@@ -15,13 +17,13 @@ export type List = {
   uploadDate            : string   // The Unix timestamp of when the list was uploaded
   updateDate            : string   // The Unix timestamp of when the list was last updated
   
-  levelIds              : number[] // All level IDs in the list, separated by commas
+  levelIDs              : number[] // All level IDs in the list, separated by commas
   
   listReward            : number   // The amount of diamonds awarded upon beating the required amount of levels in the list
   listRewardRequirement : number   // The amount of levels needed to claim the list reward
 }
-export const List_Map = {
-    1: "listId",
+export const ListM: TR.KeyMap = {
+    1: "listID",
     2: "listName",
     3: "description",
     5: "version",
@@ -31,9 +33,9 @@ export const List_Map = {
    19: "rated",
    28: "uploadDate",
    29: "updateDate",
-   49: "accountId",
+   49: "accountID",
    50: "username",
-   51: "levelIds",
+   51: "levelIDs",
    55: "listReward",
    56: "listRewardRequirement",
 }

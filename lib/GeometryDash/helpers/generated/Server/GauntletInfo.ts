@@ -1,8 +1,16 @@
+import * as TR from "../../Serializers";
+
 export type GauntletInfo = {
-  gauntletId : number // the Gauntlet ID, starting at 1
-  levels     : number[] // List of gauntlet level IDs seperated by ,
+  gauntletID : number // the Gauntlet ID, starting at 1
+  levelIDs     : number[] // List of gauntlet level IDs seperated by ,
 }
-export const GauntletInfo_Map = {
-   1: "gauntletId",
-   3: "levels",
+
+export const GauntletInfoSM: TR.SerializeMap = {
+   1: TR.Number,
+   3: TR.NumberArray,
+}
+
+export const GauntletInfoM: TR.KeyMap = {
+   1: "gauntletID",
+   3: "levelIDs",
 }

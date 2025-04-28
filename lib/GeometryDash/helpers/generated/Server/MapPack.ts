@@ -1,5 +1,7 @@
+import * as TR from "../../Serializers"
+
 export type MapPack = {
-  packId     : number // the ID for the specified Map Pack
+  packID     : number // the ID for the specified Map Pack
   packName   : string // Name of the map pack
   levels     : string // List of level IDs separated by a ,
   stars      : number // How many stars the map pack should give
@@ -8,8 +10,8 @@ export type MapPack = {
   textColor  : string // RGB color for the title text separated by ,
   barColor   : string // RGB color for the completion bar separated by ,
 }
-export const MapPack_Map = {
-   1: "packId",
+export const MapPackM: TR.KeyMap = {
+   1: "packID",
    2: "packName",
    3: "levels",
    4: "stars",

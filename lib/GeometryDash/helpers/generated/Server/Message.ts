@@ -1,7 +1,9 @@
+import * as TR from "../../Serializers"
+
 export type Message = {
-  messageId       : number  // The message ID
-  accountId       : number  // The other user's account ID
-  playerId        : number  // The other user's player ID
+  messageID       : number  // The message ID
+  accountID       : number  // The other user's account ID
+  playerID        : number  // The other user's player ID
   title           : string  // The title encoded in Base64
   messageCContent : string  // The message which has been Xor'd with a key of 14251 and then encoded in base64
   username        : string  // The other user's username
@@ -9,10 +11,10 @@ export type Message = {
   read            : boolean // 0 if the message hasn't been read, 1 if it has
   sender          : boolean // 0 if the user is receiving the message, 1 if they sent it
 }
-export const Message_Map = {
-   1: "messageId",
-   2: "accountId",
-   3: "playerId",
+export const MessageM: TR.KeyMap = {
+   1: "messageID",
+   2: "accountID",
+   3: "playerID",
    4: "title",
    5: "messageCContent",
    6: "username",

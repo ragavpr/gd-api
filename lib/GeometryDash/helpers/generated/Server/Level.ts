@@ -1,8 +1,10 @@
+import * as TR from "../../Serializers";
+
 type LevelString = string
 export type Level = {
-  levelId                : number       // The id of the level
+  levelID                : number       // The id of the level
   levelName              : string       // The name of the level
-  playerId               : number       // The player ID of the level author
+  playerID               : number       // The player ID of the level author
   description            : string       // The level description, encoded in base64
   version                : number       // The version of the level published
   gameVersion            : number       // The GD version the level was uploaded in. Versions 1.0 to 1.6 use version numbers 1 to 7 respectively. Version 10 is 1.7. Otherwise, divide the version number by ten to get the correct number.
@@ -34,12 +36,12 @@ export type Level = {
   levelString            : LevelString  // All the data for the level
 
   officialSong           : number       // The official song number used by the level, if applicable
-  customSongId           : number       // The ID of the custom Newgrounds song used in the level
-  songIds                : number[]     // The list of all song IDs in the level, separated by commas
-  sfxIds                 : number[]     // The list of all SFX IDs in the level, separated by commas
+  customSongID           : number       // The ID of the custom Newgrounds song used in the level
+  songIDs                : number[]     // The list of all song IDs in the level, separated by commas
+  sfxIDs                 : number[]     // The list of all SFX IDs in the level, separated by commas
 
   password               : number       // The password required to copy the level. It is XOR encrypted with a key of 26364
-  copiedId               : number       // The ID the of the original level (if the level was copied)
+  copiedID               : number       // The ID the of the original level (if the level was copied)
   objects                : number       // The amount of objects in the level, used to determine if the level is considered "large". It caps at 65535
   editorTime             : number       // the total number of seconds spend on the current copy of a level
   editorTimeCumulative   : number       // The accumulative total of seconds spend on previous copies of the level
@@ -51,13 +53,34 @@ export type Level = {
   settingsString         : string       // It was found in early 2.1 coming from the servers and was removed shortly after. The December 2019 2.2 Leaks however have information regarding it showing that it is called settingsString but, there is no information regarding its usage
   unknown                : number       // Unknown value, perhaps robtop-only? (corresponds to k106 in the save file)
 }
-export const Level_Map = {
-     1: "levelId",
+
+export const LevelSM: TR.SerializeMap = {
+  "default": TR.Number,
+  2: TR.NoSerializer,
+  3: TR.NoSerializer,
+  17: TR.Boolean,
+  31: TR.Boolean,
+  25: TR.Boolean,
+  38: TR.Boolean,
+  28: TR.NoSerializer,
+  29: TR.NoSerializer,
+  44: TR.Boolean,
+  4: TR.NoSerializer,
+  52: TR.NumberArray,
+  53: TR.NumberArray,
+  40: TR.Boolean,
+  26: TR.NoSerializer,
+  36: TR.NoSerializer,
+  48: TR.NoSerializer,
+}
+
+export const LevelM: TR.KeyMap = {
+     1: "levelID",
      2: "levelName",
      3: "description",
      4: "levelString",
      5: "version",
-     6: "playerId",
+     6: "playerID",
      8: "difficultyDenominator",
      9: "difficultyNumerator",
     10: "downloads",
@@ -75,9 +98,9 @@ export const Level_Map = {
     27: "password",
     28: "uploadDate",
     29: "updateDate",
-    30: "copiedId",
+    30: "copiedID",
     31: "twoPlayer",
-    35: "customSongId",
+    35: "customSongID",
     36: "extraString",
     37: "coins",
     38: "verifiedCoins",
@@ -91,8 +114,8 @@ export const Level_Map = {
     46: "editorTime",
     47: "editorTimeCumulative",
     48: "settingsString",
-    52: "songIds",
-    53: "sfxIds",
+    52: "songIDs",
+    53: "sfxIDs",
     54: "unknown",
     57: "verificationTime",
 }

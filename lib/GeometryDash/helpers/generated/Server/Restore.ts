@@ -1,3 +1,5 @@
+import * as TR from "../../Serializers"
+
 export type Restore = {
   officialLevels : string // Please refer to Official Level Structure
   stars          : number // This is how many stars that should be given to your account
@@ -6,7 +8,7 @@ export type Restore = {
   attempts       : number // This is how many attempts you have spent on levels on your accounts lifetime
   onlineLevels   : string // These are the ID's of online levels you have beaten. seperated by ,
 }
-export const Restore_Map = {
+export const RestoreM: TR.KeyMap = {
    1: "officialLevels",
    2: "stars",
    3: "demons",

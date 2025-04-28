@@ -52,5 +52,3 @@ files.forEach(file => {
     }
     fs.writeFileSync(`lib/GeometryDash/helpers/generated/Server/${name}.ts`, str)
 })
-
-
