@@ -1,5 +1,4 @@
 import * as CG from "../utils";
-import * as b64 from "url-safe-base64";
 
 import crypto from "crypto";
 
@@ -13,20 +12,17 @@ export function splitPos(str: string, pos: number) {
 }
 
 export function XOR(str: string, key: string) {
-  let result = "";
-  for (let i = 0; i < str.length; i++) {
-    result += String.fromCharCode(
-      str.charCodeAt(i) ^ key.charCodeAt(i % key.length)
-    );
-  }
-  return result;
+  const buffer = Buffer.from(str);
+  const keyBuffer = Buffer.from(key);
+  return buffer.map((byte, i) => byte ^ keyBuffer[i % key.length]!).toString();
+
 }
 
 export function B64Enc(data: string) {
-  return b64.encode(btoa(data))
+  return Buffer.from(data).toString('base64url')
 }
 export function B64Dec(data: string) {
-  return atob(b64.decode(data))
+  return Buffer.from(data, 'base64url').toString()
 }
 
 export function SHA1(str: string) {

@@ -41,9 +41,12 @@ export class GeometryDash {
     return this.state.user;
   }
 
+  downloadGJLevel = (levelID: number) => DB.DownloadGJLevel22.call(this.state, levelID)
+  getGJGauntlets = () => DB.GetGJGauntlets21.call(this.state);
+
   getGJSongInfo = (songID: number) => DB.GetGJSongInfo.call(this.state, songID)
   getGJTopArtists = (page: number = 0, total: number = 0) => DB.GetGJTopArtists.call(this.state, page, total)
+  
   getGJChallenges = (world: 0 | 1 = 0) => DB.GetGJChallenges.call(this.state, world)
   getGJRewards = (rewardType: 0 | 1 | 2 = 0) => DB.GetGJRewards.call(this.state, rewardType)
-  getGJGauntlets = () => DB.GetGJGauntlets21.call(this.state);
 }

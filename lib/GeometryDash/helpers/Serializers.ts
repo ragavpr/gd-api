@@ -1,3 +1,5 @@
+import { B64Dec, B64Enc, XOR } from "../utils";
+
 export function IndexMap(keyMap: Record<number, string>): Record<string, number> {
   const indexMap: Record<string, number> = {};
   Object.entries(keyMap).forEach((k) => (indexMap[k[1]] = parseInt(k[0])));
@@ -15,22 +17,26 @@ export type SerializeMap = Record<number, Serializer<unknown>> & {
 
 export type KeyMap = Record<number, string>
 
-export const Number: Serializer<number> = {
+export const Number: Serializer<number | undefined> = {
   decode(str) {
+    if (str === "") return undefined
     return parseFloat(str);
   },
   encode(obj) {
+    if (obj === undefined) return "";
     return obj.toString();
   },
 };
 
-export const BooleanNum: Serializer<boolean> = {
+export const BooleanNum: Serializer<boolean | undefined> = {
   decode(str) {
     if (str === "1") return true;
     if (str === "0") return false;
+    if (str === "") return undefined;
     throw new Error("Unexpected value");
   },
   encode(obj) {
+    if(obj === undefined) return "";
     return obj ? "1" : "0";
   },
 };
@@ -73,6 +79,13 @@ export const NoSerializer: Serializer<string> = {
     return obj;
   },
 };
+
+export function XorB64(key: string): Serializer<string> {
+  return {
+    decode: (str) => XOR(B64Dec(str), key),
+    encode: (obj) => B64Enc(XOR(obj, key))
+  };
+}
 
 export function DelimObj<T extends Record<string, unknown>>(
   keyMap: KeyMap,

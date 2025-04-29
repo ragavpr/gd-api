@@ -2,13 +2,81 @@ import { GJEndpoint } from "./GJEndpoint";
 import * as TR from "../helpers/Serializers";
 import * as T from "../types";
 import { secret, key, salt } from "../hidden";
-import { B64Dec, generateRS, saltedSHA1, splitPos, B64Enc, XOR } from "../utils";
+import { B64Dec, generateRS, saltedSHA1, splitPos, B64Enc, XOR, SHA1 } from "../utils";
 
 import * as crypto from 'crypto'
 
 import { GD_API_ENDPOINT, GD_VERIFY_RESPONSES } from "../env";
 
 const endpoint = `${GD_API_ENDPOINT}/database`;
+
+export class DownloadGJLevel22 extends GJEndpoint {
+  static #serializer = TR.DelimObj<T.Level>(T.LevelM, T.LevelSM, ":");
+  // static encode(obj: T.LevelInfo): string {
+  //   return TR.LevelInfoM.encode(obj);
+  // }
+  static decode(str: string): T.Level {
+    const [dec_str, hash1, hash2] = str.split("#");
+    
+    const result = this.#serializer.decode(dec_str!);
+
+    if (GD_VERIFY_RESPONSES) {
+      const dig_hash1 = this.hash1(result.levelString!);
+      if (dig_hash1 != hash1) {
+        console.warn(`Hash mismatch\n   Actual:`, dig_hash1, `\n Expected:`, hash1);
+        throw new Error("Hash mismatch");
+      }
+      const dig_hash2 = this.hash2(result);
+      if (dig_hash2 != hash2) {
+        console.warn(`Hash mismatch\n   Actual:`, dig_hash2, `\n Expected:`, hash2);
+        throw new Error("Hash mismatch");
+      }
+    }
+
+    return result;
+  }
+  static hash1(levelString: string): string {
+    if (levelString.length < 41) return SHA1(levelString + salt.levelHash);
+    let m = Math.floor(levelString.length / 40);
+    const code = Array.from({ length: 40 }, (_, i) => {
+      return levelString[i*m]
+    }).join("");
+    return SHA1(code + salt.levelHash);
+  }
+  static hash2(obj: T.Level) {
+    const code = [
+      obj.playerID!,
+      obj.stars || 0,
+      obj.demon ? 1 : 0,
+      obj.levelID!,
+      obj.verifiedCoins ? 1 : 0,
+      obj.featureScore || 0,
+      obj.password!,
+      obj.dailyNumber || 0
+    ].join(",")
+    return SHA1(code + salt.levelHash)
+  }
+
+  static async call(state: T.State, levelID: number) {
+    const rand_int = crypto.randomInt(1_000_000);
+    const rand_char = generateRS(5)
+    const rs = generateRS(10)
+    const chk = rand_char + B64Enc(XOR(rand_int.toString(), key.challenge))
+    const response = await this.callEndpoint(
+      state,
+      `${endpoint}/downloadGJLevel22.php`,
+      {
+        levelID,
+        inc: 1,
+        secret: secret.anonymous,
+        rs,
+        chk,
+      },
+      0b111
+    );
+    return this.decode(response.body);
+  }
+}
 
 export class GetGJGauntlets21 extends GJEndpoint {  
   static #serializer = TR.DelimObj<T.GauntletInfo>(

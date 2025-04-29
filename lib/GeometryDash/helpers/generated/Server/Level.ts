@@ -1,3 +1,4 @@
+import { key } from "../../../hidden";
 import * as TR from "../../Serializers";
 
 type LevelString = string
@@ -40,7 +41,7 @@ export type Level = {
   songIDs                : number[]     // The list of all song IDs in the level, separated by commas
   sfxIDs                 : number[]     // The list of all SFX IDs in the level, separated by commas
 
-  password               : number       // The password required to copy the level. It is XOR encrypted with a key of 26364
+  password               : string       // The password required to copy the level. It is XOR encrypted with a key of 26364
   copiedID               : number       // The ID the of the original level (if the level was copied)
   objects                : number       // The amount of objects in the level, used to determine if the level is considered "large". It caps at 65535
   editorTime             : number       // the total number of seconds spend on the current copy of a level
@@ -58,17 +59,18 @@ export const LevelSM: TR.SerializeMap = {
   "default": TR.Number,
   2: TR.NoSerializer,
   3: TR.NoSerializer,
-  17: TR.Boolean,
-  31: TR.Boolean,
-  25: TR.Boolean,
-  38: TR.Boolean,
+  17: TR.BooleanNum,
+  31: TR.BooleanNum,
+  25: TR.BooleanNum,
+  38: TR.BooleanNum,
+  27: TR.XorB64(key.levelPassword),
   28: TR.NoSerializer,
   29: TR.NoSerializer,
-  44: TR.Boolean,
-  4: TR.NoSerializer,
+  44: TR.NoSerializer, //TODO: Check
+  4: TR.NoSerializer, //TODO: ArrayBuffer
   52: TR.NumberArray,
   53: TR.NumberArray,
-  40: TR.Boolean,
+  40: TR.BooleanNum,
   26: TR.NoSerializer,
   36: TR.NoSerializer,
   48: TR.NoSerializer,
