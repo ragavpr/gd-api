@@ -1,5 +1,5 @@
-import { B64Dec, B64Enc } from "../../../utils"
-import * as TR from "../../Serializers"
+import { B64Dec, B64Enc } from "../../utils"
+import * as TR from "../Serializers"
 
 export type LevelList = {
   listID                : number   // The id of the list

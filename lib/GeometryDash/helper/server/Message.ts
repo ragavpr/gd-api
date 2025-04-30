@@ -1,4 +1,4 @@
-import * as TR from "../../Serializers"
+import * as TR from "../Serializers"
 
 export type Message = {
   messageID       : number  // The message ID

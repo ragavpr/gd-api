@@ -1,4 +1,4 @@
-import type { State } from "../types";
+import type { State } from "../helper/types";
 
 import got from 'got';
 

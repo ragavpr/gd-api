@@ -1,4 +1,4 @@
-import * as TR from "../../Serializers"
+import * as TR from "../Serializers"
 
 export type User = {
   accountID           ?: number  // The accountid of this player

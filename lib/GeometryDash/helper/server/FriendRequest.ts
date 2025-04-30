@@ -1,4 +1,4 @@
-import * as TR from "../../Serializers"
+import * as TR from "../Serializers"
 
 export type FriendRequest = {
   friendRequestID  : number  // An ID unique to each friend request. (I'm not 100% certain on this)

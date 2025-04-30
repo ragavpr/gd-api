@@ -1,4 +1,4 @@
-import * as TR from "../../Serializers"
+import * as TR from "../Serializers"
 
 export type MapPack = {
   packID     : number   // the ID for the specified Map Pack

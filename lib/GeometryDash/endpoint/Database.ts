@@ -1,6 +1,6 @@
 import { GJEndpoint } from "./GJEndpoint";
-import * as TR from "../helpers/Serializers";
-import * as T from "../types";
+import * as TR from "../helper/Serializers";
+import * as T from "../helper/types";
 import { secret, key, salt } from "../hidden";
 import { B64urlDec, generateRS, saltedSHA1, splitPos, B64urlEnc, XOR, SHA1, B64Dec, B64Enc } from "../utils";
 

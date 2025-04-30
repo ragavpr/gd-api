@@ -1,4 +1,4 @@
-import * as TR from "../../Serializers"
+import * as TR from "../Serializers"
 
 //Subset of User
 export type LeaderboardLevel = {

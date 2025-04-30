@@ -1,4 +1,4 @@
-import * as TR from "../../Serializers"
+import * as TR from "../Serializers"
 import { GauntletInfoM, GauntletInfoSM } from "./GauntletInfo"
 
 export type Quest = {

@@ -1,8 +1,5 @@
-import * as TR from "./helpers/Serializers";
-import * as T from "./types";
-import * as CG from "../utils";
-import * as C from "./utils";
-import * as H from "./hidden";
+import * as T from "./helper/types";
+import { generateUUID } from "./utils";
 
 import * as DB from './endpoint/Database'
 import * as AC from './endpoint/Accounts'
@@ -18,7 +15,7 @@ export class GeometryDash {
 
     if (!this.state.device) {
       this.state.device = {
-        udid: C.generateUUID(),
+        udid: generateUUID(),
       };
     }
   }

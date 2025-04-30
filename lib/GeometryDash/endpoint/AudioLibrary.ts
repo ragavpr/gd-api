@@ -2,7 +2,7 @@ import { MD5 } from "../../utils";
 
 import got from "got";
 
-import { GD_AUDIOLIB_ENDPOINT, GD_VERIFY_RESPONSES } from "../env";
+import { GD_AUDIOLIB_ENDPOINT } from "../env";
 import { salt } from "../hidden";
 
 const endpoint = `${GD_AUDIOLIB_ENDPOINT}`;

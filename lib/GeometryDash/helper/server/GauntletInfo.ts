@@ -1,4 +1,4 @@
-import * as TR from "../../Serializers";
+import * as TR from "../Serializers";
 
 export type GauntletInfo = {
   gauntletID : number // the Gauntlet ID, starting at 1

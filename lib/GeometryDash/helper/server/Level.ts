@@ -1,5 +1,5 @@
-import { key } from "../../../hidden";
-import * as TR from "../../Serializers";
+import { key } from "../../hidden";
+import * as TR from "../Serializers";
 
 type LevelString = string
 export type Level = {
