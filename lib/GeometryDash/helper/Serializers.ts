@@ -19,6 +19,11 @@ export type SerializeMap = Record<number, Serializer<unknown>> & {
 
 export type KeyMap = Record<number, string>;
 
+export const NoSerializer: Serializer<string> = {
+  decode: (str) => str,
+  encode: (str) => str,
+};
+
 export const Number: Serializer<number | undefined> = {
   decode(str) {
     if (str === '') return undefined;
@@ -70,15 +75,6 @@ export const UrlEncoded: Serializer<string> = {
   },
   encode(obj) {
     return encodeURIComponent(obj);
-  },
-};
-
-export const NoSerializer: Serializer<string> = {
-  decode: (str) => {
-    return str;
-  },
-  encode(obj) {
-    return obj;
   },
 };
 
@@ -164,7 +160,7 @@ export function DelimArr<T extends Record<string, unknown>>(
       const list = str.split(delimiter);
       if (list.length != Object.keys(keyMap).length) {
         throw new Error(
-          `Count Mismatch \n Expected: ${Object.keys(keyMap).length} \n Got: ${list.length}`
+          `Count Mismatch \n Expected: ${Object.keys(keyMap).length} \n Got: ${list.length}\n${str}`
         );
       }
 

@@ -1,13 +1,13 @@
 import * as crypto from 'crypto';
 
-export function SHA1(input: crypto.BinaryLike) {
-  const hash = crypto.createHash('sha1');
-  hash.update(input);
-  return hash.digest();
+function hash(algorithm: string) {
+  return (input: crypto.BinaryLike) => {
+    const hash = crypto.createHash(algorithm);
+    hash.update(input);
+    return hash.digest();
+  };
 }
 
-export function MD5(input: crypto.BinaryLike) {
-  const hash = crypto.createHash('md5');
-  hash.update(input);
-  return hash.digest();
-}
+export const SHA256 = hash('sha256');
+export const SHA1 = hash('sha1');
+export const MD5 = hash('md5');
