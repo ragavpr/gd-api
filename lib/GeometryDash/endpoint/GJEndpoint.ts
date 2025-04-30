@@ -7,10 +7,10 @@ export abstract class GJEndpoint {
     state: State,
     url: string,
     form_args: object,
-    trackers = 0b000
+    trackers = 0b111
   ) {
     // const url = `${GD_API_ENDPOINT}/database/${endpoint}.php`;
-
+    // TODO: Require login if secret is not anonymous.
     const form: Record<string, unknown> = {};
 
     if (trackers & 0b100) {

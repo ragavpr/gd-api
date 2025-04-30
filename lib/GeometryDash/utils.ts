@@ -18,11 +18,18 @@ export function XOR(str: string, key: string) {
 
 }
 
-export function B64Enc(data: string) {
+export function B64urlEnc(data: string) {
   return Buffer.from(data).toString('base64url')
 }
-export function B64Dec(data: string) {
+export function B64urlDec(data: string) {
   return Buffer.from(data, 'base64url').toString()
+}
+
+export function B64Enc(data: string) {
+  return Buffer.from(data).toString('base64')
+}
+export function B64Dec(data: string) {
+  return Buffer.from(data, 'base64').toString()
 }
 
 export function SHA1(str: string) {

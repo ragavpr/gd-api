@@ -1,4 +1,4 @@
-import { B64Dec, B64Enc, XOR } from "../utils";
+import { B64Dec, B64Enc, B64urlDec, B64urlEnc, XOR } from "../utils";
 
 export function IndexMap(keyMap: Record<number, string>): Record<string, number> {
   const indexMap: Record<string, number> = {};
@@ -79,6 +79,25 @@ export const NoSerializer: Serializer<string> = {
     return obj;
   },
 };
+
+// str(timestamp in seconds) <-> DateTime
+export const DateTime: Serializer<Date | undefined> = {
+  decode(str) {
+    if (str == "0" || str == "") return undefined
+    return new Date(parseInt(str) * 1000);
+  },
+  encode(obj) {
+    if (!obj) return "0"
+    return (obj.getTime() / 1000).toString();
+  },
+}
+
+export function XorB64url(key: string): Serializer<string> {
+  return {
+    decode: (str) => XOR(B64urlDec(str), key),
+    encode: (obj) => B64urlEnc(XOR(obj, key))
+  };
+}
 
 export function XorB64(key: string): Serializer<string> {
   return {
@@ -167,3 +186,23 @@ export function DelimArr<T extends Record<string, unknown>>(
     },
   }
 }
+
+export const PageS = DelimArr<{
+  total: number,
+  start: number,
+  count: number
+}>({
+  0: "total",
+  1: "start",
+  2: "count",
+}, { "default": Number }, ":")
+
+export const ColorS = DelimArr<{
+  R: number,
+  G: number,
+  B: number
+}>({
+  0: "R",
+  1: "G",
+  2: "B",
+}, { "default": Number }, ",")

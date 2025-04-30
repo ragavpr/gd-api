@@ -2,7 +2,7 @@ import { GJEndpoint } from "./GJEndpoint";
 import * as TR from "../helpers/Serializers";
 import * as T from "../types";
 import { secret, key, salt } from "../hidden";
-import { B64Dec, generateRS, saltedSHA1, splitPos, B64Enc, XOR } from "../utils";
+import { B64urlDec, generateRS, saltedSHA1, splitPos, B64urlEnc, XOR } from "../utils";
 
 import * as crypto from 'crypto'
 
@@ -38,7 +38,7 @@ export class LoginGJAccount extends GJEndpoint {
       },
       0b010
     );
-    console.log(response.body)
+    //TODO throw errors in common call
     return {
       ...this.decode(response.body),
       userName,

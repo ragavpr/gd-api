@@ -1,6 +1,8 @@
 export { type Song, SongM, SongSM } from "./helpers/generated/Server/Song.ts";
 export { type User, UserM, UserSM } from "./helpers/generated/Server/User.ts"
 export { type Level, LevelM, LevelSM } from "./helpers/generated/Server/Level.ts"
+export { type LevelList, LevelListM, LevelListSM } from "./helpers/generated/Server/LevelList.ts"
+export { type MapPack, MapPackM, MapPackSM } from "./helpers/generated/Server/MapPack.ts"
 export { type GauntletInfo, GauntletInfoM, GauntletInfoSM } from "./helpers/generated/Server/GauntletInfo.ts"
 export { type GetGJChallenges, GetGJChallengesM, GetGJChallengesSM } from "./helpers/generated/Server/CGetGJChallenges.ts"
 export { type GetGJRewards, GetGJRewardsM, GetGJRewardsSM } from "./helpers/generated/Server/CGetGJRewards.ts"
