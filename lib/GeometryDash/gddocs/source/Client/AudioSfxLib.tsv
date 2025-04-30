@@ -1,0 +1,7 @@
+Key 	Name/Value 	Type 	Description
+0 	id 	integer 	The sound effect/folder ID
+1 	name 	string 	The sound effect/folder name
+2 	isFolder 	boolean 	Whether this is a sound effect or folder
+3 	parentFolder 	integer 	The parent folder
+4 	filesize 	integer 	The sound effect file size in bytes
+5 	duration 	integer 	The duration of the sound effect, in seconds * 100

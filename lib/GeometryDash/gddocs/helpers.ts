@@ -1,9 +1,12 @@
 import * as fs from 'fs';
 
 const typeMap: Record<string, string> = {
+  string: 'string',
   String: 'string',
+  integer: 'number',
   Integer: 'number',
   Bool: 'boolean',
+  boolean: 'boolean',
   Boolean: 'boolean',
 };
 
@@ -53,22 +56,24 @@ function generateType(tsv: string, name: string) {
   return typeStr + mapStr;
 }
 
-// For every file under  lib/GeometryDash/helpers/source/Server/
-// Generate the type and map for each file
-// Save the type and map to a file under lib/GeometryDash/helpers/generated/Server/
+// const folder = "Server"
+const folder = 'Client';
 
-const files = fs.readdirSync('lib/GeometryDash/helpers/source/Server/');
+const files = fs.readdirSync(`lib/GeometryDash/gddocs/source/${folder}/`);
 files.forEach((file) => {
   const tsv = fs.readFileSync(
-    `lib/GeometryDash/helpers/source/Server/${file}`,
+    `lib/GeometryDash/gddocs/source/${folder}/${file}`,
     'utf8'
   );
   const name = file.split('.')[0]!;
   const str = generateType(tsv, name);
-  if (!fs.existsSync('lib/GeometryDash/helpers/generated/Server/')) {
-    fs.mkdirSync('lib/GeometryDash/helpers/generated/Server/', {
+  if (!fs.existsSync(`lib/GeometryDash/gddocs/generated/${folder}/`)) {
+    fs.mkdirSync(`lib/GeometryDash/gddocs/generated/${folder}/`, {
       recursive: true,
     });
   }
-  fs.writeFileSync(`lib/GeometryDash/helpers/generated/Server/${name}.ts`, str);
+  fs.writeFileSync(
+    `lib/GeometryDash/gddocs/generated/${folder}/${name}.ts`,
+    str
+  );
 });
