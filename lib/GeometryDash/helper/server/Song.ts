@@ -5,15 +5,15 @@ export type Song = {
   name            : string;              // The name of the song
   artistID        : number;              // Newgrounds ArtistID
   artistName      : string;              // The name of the artist who made the song
-  size            : number;              // Size of the song in MB, rounded to two decimal places
+  fileSize        : number;              // Size of the song in MB, rounded to two decimal places
   videoID         : string;              // the Video ID for the songs YouTube Video
-  youtubeUrl      : string;              // The URL of the newgrounds user's youtube channel
+  youtubeLink     : string;              // The URL of the newgrounds user's youtube channel
   isVerified      : boolean;             // if the song artist is scouted on newgrounds
   songPriority    : number;              // priority over the song list
-  link            : string;              // Link to the song's mp3
+  resourceLink    : string;              // Link to the song's mp3
   noNgEnum        : number;              // Type of NONG. 0 for none, 1 for NCS.
   extraArtistIDs  : number[];            // IDs of extra artists, separated by .
-  new             : boolean;             // Whether the NEW icon shows up or not
+  newTag          : boolean;             // Whether the NEW icon shows up or not
   newType         : number;              // Type of NEW icon. 0 for Yellow, 1 for Blue
   extraArtistNames: [number, string][];  // Artist names in this format: {id},{name},{id},{name}
 } & Record<string, any>;
@@ -45,9 +45,9 @@ export const SongSM: TR.SerializeMap = {
   9      : TR.Number,
   10     : TR.UrlEncoded,
   11     : TR.Number,
-  // 13     : TR.BooleanNum,
+  13     : TR.BooleanNum,
   14     : TR.Number,
-  // 12     : TR.NumberArray,
+  12     : TR.NumberArray,
   15     : extraArtistNames,
 };
 
@@ -56,15 +56,15 @@ export const SongM: TR.KeyMap = {
   2 : 'name',
   3 : 'artistID',
   4 : 'artistName',
-  5 : 'size',
+  5 : 'fileSize',
   6 : 'videoID',
-  7 : 'youtubeUrl',
+  7 : 'youtubeLink',
   8 : 'isVerified',
   9 : 'songPriority',
-  10: 'link',
+  10: 'resourceLink',
   11: 'noNgEnum',
   12: 'extraArtistIDs',
-  13: 'new',
+  13: 'newTag',
   14: 'newType',
   15: 'extraArtistNames',
 };
