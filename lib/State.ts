@@ -1,15 +1,15 @@
 import fs from 'fs-extra';
 
 export interface IStore<T> {
-  save(state: T): void
-  load(): T
+  save(state: T): void;
+  load(): T;
 }
 
 export class NoPersistence<T> implements IStore<T> {
   state: T;
 
   constructor(state?: T) {
-    this.state = state || {} as T;
+    this.state = state || ({} as T);
   }
 
   save(state: T) {

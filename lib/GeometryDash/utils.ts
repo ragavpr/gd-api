@@ -1,13 +1,13 @@
-import * as CG from "../utils";
+import * as CG from '../utils';
 
-import crypto from "crypto";
+import crypto from 'crypto';
 
 export function splitPos(str: string, pos: number) {
   //Check if string pos is within length and split and return [string, string]
-  if (str.length > pos){
+  if (str.length > pos) {
     return [str.slice(0, pos), str.slice(pos)];
   } else {
-    throw new Error("Position out of bounds");
+    throw new Error('Position out of bounds');
   }
 }
 
@@ -15,33 +15,32 @@ export function XOR(str: string, key: string) {
   const buffer = Buffer.from(str);
   const keyBuffer = Buffer.from(key);
   return buffer.map((byte, i) => byte ^ keyBuffer[i % key.length]!).toString();
-
 }
 
 export function B64urlEnc(data: string) {
-  return Buffer.from(data).toString('base64url')
+  return Buffer.from(data).toString('base64url');
 }
 export function B64urlDec(data: string) {
-  return Buffer.from(data, 'base64url').toString()
+  return Buffer.from(data, 'base64url').toString();
 }
 
 export function B64Enc(data: string) {
-  return Buffer.from(data).toString('base64')
+  return Buffer.from(data).toString('base64');
 }
 export function B64Dec(data: string) {
-  return Buffer.from(data, 'base64').toString()
+  return Buffer.from(data, 'base64').toString();
 }
 
 export function SHA1(str: string) {
-  return CG.SHA1(str).toHex()
+  return CG.SHA1(str).toHex();
 }
 
 export function saltedSHA1(str: string, salt: string) {
-  return SHA1(str + salt)
+  return SHA1(str + salt);
 }
 
 export function MD5(str: string) {
-  return CG.MD5(str).toHex()
+  return CG.MD5(str).toHex();
 }
 
 export function generateRS(n = 10) {
@@ -57,9 +56,9 @@ export function generateRS(n = 10) {
       for (const [start, end, offset] of out_space)
         if (byte < end) return String.fromCharCode(offset + byte - start);
     })
-    .join("");
+    .join('');
 }
 
 export function generateUUID() {
-  return crypto.randomUUID().toString()
+  return crypto.randomUUID().toString();
 }

@@ -1,7 +1,7 @@
-import type { State } from "../helper/types";
+import type { State } from '../helper/types';
 
 import got from 'got';
-import { secret } from "../hidden";
+import { secret } from '../hidden';
 
 export abstract class GJEndpoint {
   protected static callEndpoint(
@@ -10,8 +10,12 @@ export abstract class GJEndpoint {
     form_args: Record<string, unknown>,
     trackers = 0b111
   ) {
-    if(form_args.secret === "") throw new Error("Secret cannot be empty [Keep secrets in lib/GeometryDash/hidden.ts]");
-    if(form_args.secret != secret.anonymous && !state.user) throw new Error("Login required");
+    if (form_args.secret === '')
+      throw new Error(
+        'Secret cannot be empty [Keep secrets in lib/GeometryDash/hidden.ts]'
+      );
+    if (form_args.secret != secret.anonymous && !state.user)
+      throw new Error('Login required');
 
     const form: Record<string, unknown> = {};
 
@@ -41,23 +45,23 @@ export abstract class GJEndpoint {
       }
     });
 
-    console.log("CALLING", url, `\n`, form);
+    console.log('CALLING', url, `\n`, form);
 
     return got.post(url, {
       headers: {
-        "User-Agent": process.versions.bun ? "" : undefined, //Bun sets a default user agent if `undefined`
+        'User-Agent': process.versions.bun ? '' : undefined, //Bun sets a default user agent if `undefined`
       },
       form,
       throwHttpErrors: false,
     });
   }
   static encode(obj: unknown): string {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
   static decode(ori: string): unknown {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
   static hash(any: unknown): string {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 }
