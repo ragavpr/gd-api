@@ -1,16 +1,18 @@
 import type { State } from "../helper/types";
 
 import got from 'got';
+import { secret } from "../hidden";
 
 export abstract class GJEndpoint {
   protected static callEndpoint(
     state: State,
     url: string,
-    form_args: object,
+    form_args: Record<string, unknown>,
     trackers = 0b111
   ) {
-    // const url = `${GD_API_ENDPOINT}/database/${endpoint}.php`;
-    // TODO: Require login if secret is not anonymous.
+    if(form_args.secret === "") throw new Error("Secret cannot be empty [Keep secrets in lib/GeometryDash/hidden.ts]");
+    if(form_args.secret != secret.anonymous && !state.user) throw new Error("Login required");
+
     const form: Record<string, unknown> = {};
 
     if (trackers & 0b100) {
@@ -43,7 +45,7 @@ export abstract class GJEndpoint {
 
     return got.post(url, {
       headers: {
-        "User-Agent": process.versions.bun ? "" : undefined, //Bun sets a default user agent if undefined
+        "User-Agent": process.versions.bun ? "" : undefined, //Bun sets a default user agent if `undefined`
       },
       form,
       throwHttpErrors: false,

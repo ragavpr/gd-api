@@ -1,4 +1,5 @@
 //Secrets can be found either by MITMing the game or by decompiling the game.
+//This file only exists for development purposes. Do not commit any changes to this file to git.
 
 export const secret = {
   anonymous : '',
